@@ -3,7 +3,7 @@
     position: fixed;
     top:0;
     width: 100%;
-    padding: 20px;
+    padding: 10px;
     height: 30px;
     /* justify content fix only when width is 100% if u use position fixed */
     justify-content: space-between;  
