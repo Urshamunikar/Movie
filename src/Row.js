@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from './axios';
 import './Row.css';
 const base_url = "https://image.tmdb.org/t/p/original/";
-function Row({ title, fetchUrl }) {
+function Row({ title, fetchUrl, isLargeRow }) {
 
 
     const [movies, setMovies] = useState([]);
@@ -14,6 +14,7 @@ function Row({ title, fetchUrl }) {
             const request = await axios.get(fetchUrl);
             // here we get basseUrl/fetchUrl=>requests haru
             setMovies(request.data.results);
+           
             return request;
 
 
@@ -28,7 +29,7 @@ function Row({ title, fetchUrl }) {
     return (
         <div className="row">
             {/* title */}
-            <h1>{title}</h1>
+            <h1 className="row_title">{title}</h1>
 
             {/* container bunch of images */}
             <div className="row_posters">
@@ -36,8 +37,8 @@ function Row({ title, fetchUrl }) {
                 {movies.map(movie => (
                     // in react if u r working with huge data we need to pass a uniqu key so that if anything changes then then it uses that key 
                     <img
-                        className= "row_poster"
-                        src={`${base_url}${movie.poster_path}`} alt={movie.name} />
+                        className={`row_poster ${isLargeRow && "row_posterLarge"}`}
+                        src={`${base_url}${isLargeRow ? movie.poster_path : movie.backdrop_path}`} alt={movie.name} />
                 ))}
 
             </div>
